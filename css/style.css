@@ -1,0 +1,21 @@
+img {
+  width: 250px;
+}
+
+.icon {
+  width: 35px;
+  cursor: pointer;
+}
+
+#searchForm {
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  border: solid 1pt black;
+  border-radius: 5px;
+}
+
+#searchForm input {
+  border: none;
+  flex-grow: 1;
+}
