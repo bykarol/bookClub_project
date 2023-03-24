@@ -1,0 +1,72 @@
+@import url(../css/base.css);
+
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
+.header-footer {
+  text-align: center;
+  font-family: var(--font-title);
+  color: var(--color-title);
+  background-color: var(--bg-specialPink);
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+/*BODY*/
+body {
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-title);
+  font-family: var(--font-paragraph);
+  font-size: 1.2rem;
+}
+
+/*MAIN*/
+main {
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 var(--pad-left);
+  background-color: var(--generic);
+  box-shadow: var(--box-shadow);
+}
+
+main div {
+  min-height: 32px;
+}
+
+/*div results*/
+.correct {
+  background-color: var(--bg-specialGreen);
+  color: var(--generic);
+}
+
+.wrong {
+  background-color: var(--bg-specialGreen);
+  color: var(--generic);
+}
+
+/* .hide {
+  display: none;
+} */
+
+/*buttons*/
+button {
+  background-color: var(--bg-specialGreen);
+  padding: .5rem;
+  font-size: var(--font-title);
+  color: var(--generic);
+  font-size: 2rem;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+}
+
+/*FOOTER*/
+footer {
+  font-size: 1rem;
+}
