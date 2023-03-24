@@ -1,0 +1,102 @@
+[
+    {
+        "question": "Complete the title of this Gabriel García Márquez book “One Hundred Years of?",
+        "answers": [
+            "Solitude",
+            "Discourage",
+            "Revenge",
+            "Love"
+        ],
+        "correct": "Solitude"
+    },
+    {
+        "question": "Who wrote 'To Kill a Mockingbird'?",
+        "answers": [
+            "Marcel Proust",
+            "Harper Lee",
+            "James Joyce",
+            "Virginia Woolf"
+        ],
+        "correct": "Harper Lee"
+    },
+    {
+        "question": "What is the second Harry Potter book?",
+        "answers": [
+            "Order of the Phoenix",
+            "Prisoner of Azkaban",
+            "Harry Potter and the Chamber of Secrets",
+            "Half-Blood Prince"
+        ],
+        "correct": "Harry Potter and the Chamber of Secrets"
+    },
+    {
+        "question": "Daniel Radcliffe became a global star in the film industry due to his performance in which film franchise?",
+        "answers": [
+            "Ted",
+            "Spy Kids",
+            "Harry Potter",
+            "Pirates of the Caribbean "
+        ],
+        "correct": "Harry Potter"
+    },
+    {
+        "question": "Which book by Cheryl Strayed was adapted as a movie in 2014 by Reese Witherspoon?",
+        "answers": [
+            "Brave Enough",
+            "Torch",
+            "Wild",
+            "Tiny beautiful things"
+        ],
+        "correct": "Wild"
+    },
+    {
+        "question": "In which fantasy world is 'The Lion, the Witch, and the Wardrobe' by C.S. Lewis set?",
+        "answers": [
+            "Hogsmeade",
+            "Far Far Away",
+            "Narnia",
+            "Esgaroth"
+        ],
+        "correct": "Narnia"
+    },
+    {
+        "question": "Which 3 countries (apart from the US) does Elizabeth Gilbert travel to in 'Eat, Pray, Love'?",
+        "answers": [
+            "Italy, Greek and Spain",
+            "England, Germany and Indonesia",
+            "Finland, England and France",
+            "Italy, India and Indonesia"
+        ],
+        "correct": "Italy, India and Indonesia"
+    },
+    {
+        "question": "Which country is Paulo Coelho from?",
+        "answers": [
+            "Brazil",
+            "Portugal",
+            "Cape Verde",
+            "Spain"
+        ],
+        "correct": "Brazil"
+    },
+    {
+        "question": "When was 'Around the World in Eighty Days'  by Jules Verne published?",
+        "answers": [
+            "1997",
+            "1985",
+            "1872",
+            "1889"
+        ],
+        "correct": "1872"
+    },
+    {
+        "question": "Which British author wrote 'Wuthering Heights'?",
+        "answers": [
+            "Emily Brontë",
+            "Martin Amis",
+            "Douglas Adams",
+            "Francis Leslie Ashton"
+        ],
+        "correct": "Emily Brontë"
+    }
+]

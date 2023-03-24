@@ -1,15 +1,16 @@
 import ExternalServices from "./ExternalServices";
 import BookList from "./BookList";
 
-export async function searchBook(htmlSection, searchInput) {
+export async function searchBook(searchInput, htmlSection) {
   htmlSection.innerHTML = "";
-  let search = new ExternalServices(searchInput);
-  await search.getData();
-  return search.data;
-
+  const search = new ExternalServices(searchInput);
+  const volumeBook = await search.getData();
+  return volumeBook;
 }
 
 export function renderList(booksData, htmlSection) {
-  const list = new BookList(booksData);
-  list.prepareList(htmlSection);
+  for (const book of booksData) {
+    const list = new BookList(book);
+    list.prepareList(htmlSection);
+  }
 }
