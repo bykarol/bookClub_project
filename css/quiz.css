@@ -55,9 +55,10 @@ main div {
 } */
 
 /*buttons*/
-button {
+.button {
+  text-align: center;
   background-color: var(--bg-specialGreen);
-  padding: .5rem;
+  padding: .3rem;
   font-size: var(--font-title);
   color: var(--generic);
   font-size: 2rem;
