@@ -43,7 +43,7 @@ const questionShuffle = () => {
 }
 
 const start = () => {
-  shuffleQuestions();
+  questionShuffle();
 }
 
 
