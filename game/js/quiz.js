@@ -24,6 +24,10 @@ const view = {
   userAnswer: document.querySelector("#q-answers"),
   score: 0,
   arrayQuestions: [],
+  render() {
+
+  },
+
 }
 
 
@@ -43,8 +47,12 @@ const questionShuffle = () => {
 }
 
 const start = () => {
+  view.score = 0;
   questionShuffle();
+  //construir el state
 }
+
+
 
 
 
