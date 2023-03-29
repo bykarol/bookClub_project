@@ -70,7 +70,7 @@ const view = {
       fragment.append(this.answerChecked);
     }
     this.mainEl.append(fragment);
-    ulAnswers.addEventListener("click", (checkAnswer));
+    ulAnswers.addEventListener("click", checkAnswer);
   },
 }
 
