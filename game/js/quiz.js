@@ -43,6 +43,7 @@ const view = {
   // scoreEl: document.querySelector("#q-score"),
   startBtnEl: document.querySelector("#q-btnStart"),
   mainEl: document.querySelector("#q-main"),
+  answerChecked: undefined,
   // qWrapperEl: document.querySelector("#q-wrapper"),
   // userQuestionEl: document.querySelector("#q-question"),
   // ulAnswersEl: document.querySelector("#q-ul"),
@@ -65,36 +66,33 @@ const view = {
     fragment.append(scoreEl);
     fragment.append(pQuestion);
     fragment.append(ulAnswers);
+    if (this.answerChecked !== undefined) {
+      fragment.append(this.answerChecked);
+    }
     this.mainEl.append(fragment);
-    ulAnswers.addEventListener("click", checkAnswer);
+    ulAnswers.addEventListener("click", (checkAnswer));
   },
 }
-
-// const render = (questionToDisplay) => {
-//   view.mainEl.innerHTML = "";
-//   view.mainEl.append(questionToDisplay);
-// }
 
 const checkAnswer = (ev) => {
   const userAnswer = ev.target.textContent;
   let pResult = document.createElement("p");
-  if (view.qIndex < view.arrayQuestions[0].correct.length) {
+  if (view.qIndex < view.arrayQuestions.length) {
     if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
       console.log("Good!!");
       pResult.classList.add("correct");
       pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
-      view.mainEl.append(pResult);
+      view.answerChecked = pResult;
       view.score += 1;
     }
     else {
       pResult.classList.add("wrong");
       pResult.textContent = `Wrong!!!. The correct answer is: ${view.arrayQuestions[view.qIndex].correct}`;
-      view.mainEl.append(pResult);
+      view.answerChecked = pResult;
     }
     view.qIndex += 1;
     view.setup();
   }
-
 }
 
 
