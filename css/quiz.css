@@ -41,12 +41,14 @@ main div {
 
 /*div results*/
 .correct {
+  padding-left: var(--pad-left);
   background-color: var(--bg-specialGreen);
   color: var(--generic);
 }
 
 .wrong {
-  background-color: var(--bg-specialGreen);
+  padding-left: var(--pad-left);
+  background-color: red;
   color: var(--generic);
 }
 
