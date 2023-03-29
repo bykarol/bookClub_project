@@ -19,18 +19,6 @@ const data = (questions) => {
   }
 }
 
-const view = {
-  startBtn: document.querySelector("#q-btnStart"),
-  userAnswer: document.querySelector("#q-answers"),
-  score: 0,
-  arrayQuestions: [],
-  render() {
-
-  },
-
-}
-
-
 const rndGenerator = (questionsLength) => {
   return Math.floor(Math.random() * (questionsLength));
 }
@@ -46,10 +34,28 @@ const questionShuffle = () => {
   view.arrayQuestions = shuffleQuestions;
 }
 
+const view = {
+  startBtnEl: document.querySelector("#q-btnStart"),
+  userAnswerEl: document.querySelector("#q-answers"),
+  scoreElement: document.querySelector("#q-score"),
+  arrayQuestions: [],
+  // setup() {
+  //   const fragmentElement = document.createDocumentFragment;
+
+  // },
+  // render() {
+
+  // },
+}
+
+
 const start = () => {
-  view.score = 0;
+  console.log("array original", view.arrayQuestions);
   questionShuffle();
-  //construir el state
+  console.log("array mezclado", view.arrayQuestions)
+  // score = 0;
+  // questionShuffle();
+  // view.setup();
 }
 
 
@@ -57,7 +63,7 @@ const start = () => {
 
 
 window.addEventListener("load", getData);
-view.startBtn.addEventListener('click', start);
+view.startBtnEl.addEventListener('click', start);
 // console.log(view.shuffleArrayQuestions);
 // view.startBtn.addEventListener('click', start);
 // view.userAnswer.addEventListener("click", CheckAnswer);
