@@ -4,6 +4,13 @@ header h1 {
   flex-grow: 1;
 }
 
+.alert {
+  font-size: 3rem;
+  color: var(--color-title);
+  font-weight: bold;
+  text-align: center;
+}
+
 /*FOOTER*/
 footer {
   font-size: 1rem;

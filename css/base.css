@@ -34,7 +34,7 @@
 header.header-footer {
   align-items: center;
   justify-items: center;
-  background-color: var(--generic);
+  background-color: var(--bg-specialPink);
 }
 
 header h1 {
@@ -87,7 +87,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: var(--generic);
+  color: var(--color-title);
 }
 
 
@@ -95,7 +95,6 @@ nav ul li a {
 body {
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--color-title);
   font-family: var(--font-paragraph);
   font-size: 1.2rem;
 }
