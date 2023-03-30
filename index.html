@@ -11,16 +11,12 @@
 </head>
 
 <body>
-  <header>
-    <img src="./images/myLibray-logo.png" alt="My Library by Karol - Logo">
-    <h1>My Library - tracking your readings</h1>
-  </header>
   <nav>
-    <ul>
-      <li><a href="#aboutUs">About My Library</a></li>
+    <ul class="flex">
+      <li><a href="#aboutUs">My Library Project</a></li>
       <li><a href="#myReadings">My Readings</a></li>
       <li><a href="#myFavorites">My Favorites</a></li>
-      <li><a href="./game/bookQuiz.html" target="_blank">Test your Knowledge</a></li>
+      <li><a href="./game/bookQuiz.html" target="_blank">Book Trivia</a></li>
       <li>
         <form id="searchForm" name="searchForm">
           <input type="search" id="searchIn" placeholder="Book title">
@@ -31,14 +27,25 @@
       </li>
     </ul>
   </nav>
-  <main>
+  <header class="header-footer flex">
+    <img id="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
+    <h1 id="q-title">My Library, a book-lovers place!</h1>
+  </header>
+  <main class="flex">
+    <section id="aboutUs">
+      <h2>About this project</h2>
+      <ul>
+        <li>Love reading???</li>
+        <li>Looking for the best books???</li>
+        <li>Finding a place to fit in???</li>
+        <li>Willing to track your lectures???</li>
+        <li>This is the place!!!</li>
+      </ul>
+    </section>
     <section id="bookList">
 
     </section>
-    <!-- <section id="aboutUs">
-      <h2>About My Library</h2>
-    </section>
-    <section id="trackingReadings">
+    <!-- <section id="trackingReadings">
       <h2>My Readings</h2>
       <ul id="list">
 
@@ -58,13 +65,13 @@
       </form>
     </section> -->
   </main>
-  <footer>
+  <footer class="header-footer">
     <ul>
       <li>Developed by Karol Bracho</li>
     </ul>
   </footer>
-  <script src="./js/main.js"></script>
-  <!-- <script type="module" src="./js/ExternalServices.js"></script> -->
+  <!-- <script type="module" src="./js/main.js"></script> -->
+  <script type="module" src="./js/ExternalServices.js"></script>
   <!-- <script type="module" src="./js/utils.js"></script> -->
 </body>
 

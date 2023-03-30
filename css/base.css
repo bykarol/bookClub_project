@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Playfair+Display:wght@500&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1pt red dashed;
+  /* border: 1pt red dashed; */
 }
 
 :root {
@@ -18,4 +20,100 @@
   /* padding */
   --pad-left: 1rem;
   --box-shadow: 3px 3px var(--color-paragraph);
+}
+
+.header-footer {
+  text-align: center;
+  font-family: var(--font-title);
+  color: var(--color-title);
+  padding: 0 1.5rem;
+  background-color: var(--bg-specialPink);
+  font-weight: bold;
+}
+
+header.header-footer {
+  align-items: center;
+  justify-items: center;
+  background-color: var(--generic);
+}
+
+header h1 {
+  word-spacing: 10px;
+  letter-spacing: 2px;
+}
+
+
+#submitBtn {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.icon {
+  width: 30px;
+  cursor: pointer;
+}
+
+footer {
+  font-size: 1rem;
+}
+
+img#logo {
+  width: 200px;
+}
+
+#searchForm {
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center;
+}
+
+#searchForm input {
+  border: none;
+  flex-grow: 1;
+  padding: .6rem;
+}
+
+nav ul {
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5px;
+}
+
+nav ul li {
+  list-style-type: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--generic);
+}
+
+
+/*BODY*/
+body {
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-title);
+  font-family: var(--font-paragraph);
+  font-size: 1.2rem;
+}
+
+/*MAIN*/
+main {
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 var(--pad-left);
+  background-color: var(--bg-specialPink);
+  box-shadow: var(--box-shadow);
+}
+
+/*Others*/
+.flex {
+  display: flex;
+  gap: 10px;
 }
