@@ -12,55 +12,36 @@
 
 <body>
   <header class="header-footer flex">
-    <img id="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
-    <h1 id="q-title">My Library, a book-lovers place!</h1>
+    <img class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
+    <h1>My Library, a book-lovers place!</h1>
+    <img id="menuIcon" class="icon" src="./images/book.png" alt="Menu icon" title="See menu">
   </header>
+  <form id="searchForm" name="searchForm">
+    <input type="search" id="searchIn" placeholder="Book title or book author">
+    <button type="submit" id="submitBtn">
+      <img id="searchIcon" class="icon" src="./images/search_Icon.png" alt="search icon">
+    </button>
+  </form>
   <nav>
-    <ul class="flex">
-      <li><a href="#aboutUs">My Library Project</a></li>
+    <ul>
+      <li><a href="./index.html">My Library Project</a></li>
       <!-- <li><a href="#myReadings">My Readings</a></li> -->
       <li><a href="#myFavorites">My Favorites</a></li>
       <li><a href="./game/bookQuiz.html" target="_blank">Book Trivia</a></li>
-      <li>
-        <form id="searchForm" name="searchForm">
-          <input type="search" id="searchIn" placeholder="Book title">
-          <button type="submit" id="submitBtn">
-            <img id="searchIcon" class="icon" src="./images/search_Icon.png" alt="search icon">
-          </button>
-        </form>
-      </li>
     </ul>
   </nav>
-  <main class="flex">
+  <main>
     <section id="bookList"></section>
     <section id="aboutUs">
-      <h2>About this project</h2>
-      <ul>
-        <li>Love reading???</li>
-        <li>Looking for the best books???</li>
-        <li>Finding a place to fit in???</li>
-        <li>Willing to track your lectures???</li>
-        <li>This is the place!!!</li>
-      </ul>
+      <h2>About My Library</h2>
+      <img class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
+      <p>In this site you can search books and mark them, this way you track your favorites books,
+        either to read them later or because you have already read them. All in just one place, you
+        can check it on "My Favorites".</p>
+      <p>Our main purpose is to promote reading and becoming a meeting place where you could share with other
+        reading-lovers.
+      </p>
     </section>
-    <!-- <section id="trackingReadings">
-      <h2>My Readings</h2>
-      <ul id="list">
-      </ul>
-      <form id="templeForm" name="templeForm">
-        <label for="searchIn"></label>
-        <input type="search" id="templeName" name="name" placeholder="Temple Name">
-        <input type="search" id="templeLocation" name="location" placeholder="Location">
-        <input type="submit" value="Agregar Templo">
-      </form>
-    </section>
-    <section id="#myFavorites">
-      <h2>My Favorites Books</h2>
-      <form>
-        <input type="text" placeholder="Book title">
-        <img src="./images/search_Icon.png" alt="buscar">
-      </form>
-    </section> -->
   </main>
   <footer class="header-footer">
     <ul>

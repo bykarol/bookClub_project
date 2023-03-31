@@ -1,7 +1,18 @@
 @import url(./base.css);
 
-header h1 {
+/* search */
+form#searchForm {
+  display: flex;
+  align-content: center;
+  margin: 10px 1rem 0 1rem;
+  border-radius: 5px;
+  border: solid 1pt gainsboro;
+}
+
+#searchForm input {
+  border: none;
   flex-grow: 1;
+  padding: .6rem;
 }
 
 .alert {
@@ -11,7 +22,40 @@ header h1 {
   text-align: center;
 }
 
+/*BODY*/
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-paragraph);
+}
+
+/*MAIN*/
+main {
+  flex-grow: 1;
+  margin: 10px 0;
+  padding: 10px var(--pad-left);
+  background-color: var(--bg-specialPink);
+  box-shadow: var(--box-shadow);
+}
+
+main p {
+  margin: 1rem 0;
+}
+
+
 /*FOOTER*/
 footer {
   font-size: 1rem;
+}
+
+@media (min-width: 780px) {
+
+  /* Nav */
+  nav ul {
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
