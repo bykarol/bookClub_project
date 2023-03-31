@@ -67,8 +67,9 @@ const view = {
     }
     this.mainEl.append(fragment);
     ulAnswers.addEventListener("click", (e) => {
-      if (e.target.matches("li"))
+      if (e.target.matches("li")) {
         checkAnswer(e);
+      }
     });
   },
   reset() {
