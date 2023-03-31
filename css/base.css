@@ -22,68 +22,71 @@
   --box-shadow: 3px 3px var(--color-paragraph);
 }
 
-.header-footer {
-  text-align: center;
-  font-family: var(--font-title);
-  color: var(--color-title);
-  padding: 0 1.5rem;
-  background-color: var(--bg-specialPink);
-  font-weight: bold;
+/* HEADER */
+.icon {
+  width: 27px;
+  cursor: pointer;
 }
 
-header.header-footer {
+.icon#menuIcon:hover {
+  width: 30px;
+}
+
+header img.logo {
+  display: none;
+}
+
+main img.logo {
+  width: 200px;
+  float: left;
+}
+
+.header-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-items: center;
-  background-color: var(--bg-specialPink);
+  font-family: var(--font-title);
+  color: var(--color-title);
+  font-weight: bold;
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
 }
 
 header h1 {
-  word-spacing: 10px;
-  letter-spacing: 2px;
+  font-size: 1.2rem;
 }
-
 
 #submitBtn {
   background-color: black;
   border-radius: 5px;
 }
 
-.icon {
-  width: 30px;
-  cursor: pointer;
+/* nav */
+nav {
+  width: 100%;
+  margin: 10px 0;
+  display: none;
 }
 
-footer {
-  font-size: 1rem;
-}
-
-img#logo {
-  width: 200px;
-}
-
-#searchForm {
-  max-width: 300px;
-  display: flex;
-  justify-content: center;
-  border-radius: 5px;
-  border: solid 1pt gainsboro;
-  align-items: center;
-}
-
-#searchForm input {
-  border: none;
-  flex-grow: 1;
-  padding: .6rem;
-}
-
-nav ul {
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 5px;
+nav.open {
+  display: block;
 }
 
 nav ul li {
+  text-align: center;
+  padding: .6rem;
+  border-bottom: solid 1pt gainsboro;
+}
+
+ul li {
   list-style-type: none;
+}
+
+nav ul li:hover {
+  border-bottom: solid 2pt var(--bg-specialGreen);
+  box-shadow: var(--box-shadow);
+  font-size: 1.1rem;
 }
 
 nav ul li a {
@@ -92,28 +95,26 @@ nav ul li a {
 }
 
 
-/*BODY*/
-body {
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: var(--font-paragraph);
-  font-size: 1.2rem;
-}
 
-/*MAIN*/
-main {
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  width: 90%;
-  margin: 0 auto;
-  padding: 0 var(--pad-left);
-  background-color: var(--bg-specialPink);
-  box-shadow: var(--box-shadow);
-}
+@media (min-width: 780px) {
 
-/*Others*/
-.flex {
-  display: flex;
-  gap: 10px;
+  /*Flex*/
+  .flex {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* header */
+  img.logo {
+    width: 150px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  img.logo {
+    display: block;
+  }
+
 }

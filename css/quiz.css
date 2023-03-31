@@ -1,5 +1,10 @@
 @import url(../css/base.css);
 
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
 main div {
   min-height: 32px;
 }
@@ -32,20 +37,4 @@ main div {
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   cursor: pointer;
-}
-
-
-#searchForm {
-  max-width: 300px;
-  display: flex;
-  justify-content: center;
-  border: solid 1pt black;
-  border-radius: 5px;
-  align-items: center;
-}
-
-#searchForm input {
-  border: none;
-  flex-grow: 1;
-  padding: .6rem;
 }
