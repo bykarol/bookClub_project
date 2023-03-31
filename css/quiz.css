@@ -49,6 +49,21 @@ main ul li:hover {
   box-shadow: var(--box-shadow);
 }
 
+.finalScoreList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: transparent;
+  cursor: none;
+  color: var(--color-title);
+  margin: 0;
+  padding: 0;
+}
+
+.finalScoreList:hover {
+  box-shadow: none;
+}
+
 /*div results*/
 .correct,
 .wrong {
