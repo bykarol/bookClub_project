@@ -40,24 +40,20 @@ const questionShuffle = () => {
 
 const view = {
   score: 0,
-  // scoreEl: document.querySelector("#q-score"),
+  arrayScores: [],
   startBtnEl: document.querySelector("#q-btnStart"),
   mainEl: document.querySelector("#q-main"),
   answerChecked: undefined,
-  // qWrapperEl: document.querySelector("#q-wrapper"),
-  // userQuestionEl: document.querySelector("#q-question"),
-  // ulAnswersEl: document.querySelector("#q-ul"),
   arrayQuestions: [],
   qIndex: 0,
   setup() {
     this.mainEl.innerHTML = "";
     const fragment = document.createDocumentFragment();
     const scoreEl = document.createElement("p");
-    scoreEl.textContent = `Score ${this.score}`;
+    scoreEl.textContent = `Score: ${this.score}`;
     const pQuestion = document.createElement("p");
     pQuestion.textContent = this.arrayQuestions[this.qIndex].question;
     const ulAnswers = document.createElement("ul");
-    // this.scoreEl.textContent = this.score;
     for (const answer of this.arrayQuestions[this.qIndex].answers) {
       const liElement = document.createElement("li");
       liElement.textContent = answer;
@@ -70,7 +66,21 @@ const view = {
       fragment.append(this.answerChecked);
     }
     this.mainEl.append(fragment);
-    ulAnswers.addEventListener("click", checkAnswer);
+    ulAnswers.addEventListener("click", (e) => {
+      if (e.target.matches("li"))
+        checkAnswer(e);
+    });
+  },
+  reset() {
+    this.qIndex = 0;
+    if (this.arrayScores.length < 5) {
+      this.arrayScores.unshift(this.score);
+    }
+    else {
+      this.arrayScores.shift();
+      this.arrayScores.push(this.score);
+    }
+    this.score = 0;
   },
 }
 
@@ -79,7 +89,7 @@ const checkAnswer = (ev) => {
   let pResult = document.createElement("p");
   if (view.qIndex < view.arrayQuestions.length) {
     if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
-      console.log("Good!!");
+      // console.log("Good!!");
       pResult.classList.add("correct");
       pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
       view.answerChecked = pResult;
@@ -92,22 +102,51 @@ const checkAnswer = (ev) => {
     }
     view.qIndex += 1;
     view.setup();
+    if (view.qIndex === view.arrayQuestions.length - 1) {
+      gameOver();
+    }
   }
 }
 
+const gameOver = () => {
+  view.mainEl.innerHTML = "";
+  const lastFragment = document.createDocumentFragment();
+  const buttonElement = document.createElement("button");
+  const scoreElement = document.createElement("p");
+  const olScores = document.createElement("ol");
+  const h3Element = document.createElement("h3");
+  if (view.arrayScores.length > 0) {
+    h3Element.textContent = "Last Scores";
+    for (let i = 0; i < view.arrayScores.length; i++) {
+      const liScoreElement = document.createElement("li");
+      liScoreElement.textContent = `Game #${i + 1} - Final Score: ${view.arrayScores[i]}`;
+      liScoreElement.classList.add("finalScoreList");
+      olScores.append(liScoreElement);
+    }
+  }
+  buttonElement.textContent = "Play Again";
+  buttonElement.classList.add("button");
+  scoreElement.textContent = `Final Score: ${view.score}`;
+  lastFragment.append(scoreElement);
+  lastFragment.append(h3Element);
+  lastFragment.append(olScores);
+  lastFragment.append(buttonElement);
+  view.mainEl.append(lastFragment);
+  buttonElement.addEventListener("click", playAgain);
+}
+
+const playAgain = (e) => {
+  e.preventDefault();
+  view.reset();
+  questionShuffle();
+  view.setup();
+}
 
 const start = () => {
-  // view.scoreEl = 0;
   questionShuffle();
-  // view.qWrapperEl.classList.toggle("hide");
-  // view.startBtnEl.classList.toggle("hide");
   view.setup();
-  // render()
-
 }
 
 
-
-// view.ulAnswersEl.addEventListener("click", checkAnswer);
 window.addEventListener("load", getData);
 view.startBtnEl.addEventListener('click', start);
