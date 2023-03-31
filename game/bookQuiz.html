@@ -14,27 +14,30 @@
   <link rel="stylesheet" href="../css/quiz.css">
 </head>
 
-<body class="flex">
-  <nav>
-    <ul class="flex">
-      <li><a href="../index.html#aboutUs">My Library Project</a></li>
-      <!-- <li><a href="../index.html#myReadings">My Readings</a></li> -->
-      <li><a href="../index.html#myFavorites">My Favorites</a></li>
-      <li><a href="./bookQuiz.html">Start Again</a></li>
-    </ul>
-  </nav>
-  <header class="header-footer">
-    <h1 id="q-title">Book Trivia!</h1>
+<body>
+  <header class="header-footer flex">
+    <img class="logo" src="../images/myLibray-logo.png" alt="My Library Logo">
+    <h1><a href="../index.html" title="Go to my Library">My Library</a> - Book Trivia</h1>
+    <a title="Refresh" href="./bookQuiz.html"><img id="menuIcon" class="icon" src="../images/book.png"
+        alt="Menu icon"></a>
   </header>
   <main id="q-main" class="flex">
-    <p id="q-score">Score: 0</p>
+    <h2>Are you ready???</h2>
     <!-- <p id="q-question">Question</p>
-    <ul id="q-ul"></ul>
-    <p id="q-result" class="hide">It's correct or not</p> 
-    <p id="q-finalInfo" class="hide">Final result</p>-->
+      <ul id="q-ul"></ul>
+      <p id="q-result" class="hide">It's correct or not</p> 
+      <p id="q-finalInfo" class="hide">Final result</p>-->
     <button id="q-btnStart" class="button">Start</button>
+    <p id="q-score">Score: 0</p>
   </main>
-  <footer class="header-footer">Developed by Karol - 2023</footer>
+  <footer class="header-footer">
+    <ul>
+      <li>&copy; 2023 - My Library</li>
+      <li><a href="https://www.linkedin.com/in/karolbrachoyanez/" target="_blank">Developed by <span id="authorName"
+            title="Link to Karol profile">Karol
+            Bracho</span></a></li>
+    </ul>
+  </footer>
   <script type="module" src="./js/quiz.js"></script>
 </body>
 

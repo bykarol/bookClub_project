@@ -112,9 +112,9 @@ function prepareList() {
       titleEl.textContent = title;
       const publishedEl = document.createElement("h4");
       publishedEl.textContent = `Published by ${publisher}. (${publishedDate})`;
-      fragment.append(imgEl);
       fragment.append(titleEl);
       fragment.append(authorFragment);
+      fragment.append(imgEl);
       fragment.append(publishedEl);
     } catch (error) {
       console.log(error.message)
@@ -127,6 +127,7 @@ function render(displayInfo) {
   try {
     view.htmlMain.innerHTML = "";
     view.htmlSection.innerHTML = "";
+    view.htmlSection.classList.add("bookSection");
     view.htmlSection.append(displayInfo);
     view.htmlMain.append(view.htmlSection);
   } catch (error) {

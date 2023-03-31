@@ -22,32 +22,59 @@ form#searchForm {
   text-align: center;
 }
 
-/*BODY*/
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: var(--font-paragraph);
-}
-
 /*MAIN*/
 main {
-  flex-grow: 1;
-  margin: 10px 0;
-  padding: 10px var(--pad-left);
-  background-color: var(--bg-specialPink);
-  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 main p {
   margin: 1rem 0;
+  /* display: flex; */
+}
+
+/* sections */
+.bookSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.bookSection img {
+  margin: 7px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+}
+
+.bookSection h4:not(:last-child) {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid 1pt var(--bg-specialGreen);
+}
+
+.bookSection h2 {
+  color: var(--color-title);
+  text-shadow: var(--text-shadow);
+}
+
+.bookSection h3 {
+  color: var(--bg-specialGreen);
+  text-shadow: var(--text-shadow);
+  margin: 3px;
+}
+
+#aboutUs {
+  position: relative;
+}
+
+#aboutUs img.logo {
+  max-width: 200px;
+  float: right;
 }
 
 
-/*FOOTER*/
-footer {
-  font-size: 1rem;
-}
 
 @media (min-width: 780px) {
 
