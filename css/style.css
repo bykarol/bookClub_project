@@ -73,16 +73,3 @@ main p {
   max-width: 200px;
   float: right;
 }
-
-
-
-@media (min-width: 780px) {
-
-  /* Nav */
-  nav ul {
-    display: flex;
-    gap: 10px;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-}

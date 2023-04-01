@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: dashed 1pt red; */
 }
 
 :root {
@@ -106,6 +107,10 @@ ul li a {
   color: var(--color-title);
 }
 
+ul li.active {
+  border-bottom: solid 2pt var(--bg-specialGreen);
+}
+
 /*BODY*/
 body {
   display: flex;
@@ -126,6 +131,7 @@ main {
 
 /*FOOTER*/
 footer {
+  text-align: center;
   font-size: .9rem;
   padding: .5rem;
 }
@@ -139,6 +145,7 @@ footer #authorName:hover {
   text-shadow: var(--text-shadow);
 }
 
+/*MEDIUM VIEW*/
 @media (min-width: 550px) {
   #header-wrapper {
     display: grid;
@@ -154,44 +161,76 @@ footer #authorName:hover {
     flex-grow: 0;
   }
 
-  header.header-footer {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-family: var(--font-title);
-    color: var(--color-title);
-    font-weight: bold;
-    box-shadow: var(--box-shadow);
+  nav ul li {
+    margin-right: 10px;
   }
 }
 
+/*LARGE VIEW*/
 @media (min-width: 780px) {
-
-  /*Flex*/
-  .flex {
-    display: flex;
-    gap: 10px;
+  #menuIcon {
+    display: none;
   }
 
-  /* header */
-  img.logo {
-    width: 150px;
+  #header-wrapper {
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: none;
+    grid-template-areas: "headerArea navArea searchArea";
+    place-items: center;
+    padding: 0 10px 0 0;
+
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-evenly;
+    grid-area: navArea;
+    font-size: 1rem;
+  }
+
+  nav ul {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  nav ul li {
+    flex-grow: 1;
+  }
+
+  nav ul li:hover {
+    box-shadow: none;
+    font-size: 1.1rem;
+  }
+
+  header.header-footer {
+    grid-area: headerArea;
+    box-shadow: none;
+  }
+
+  form#searchForm {
+    max-width: 200px;
+    grid-area: searchArea;
   }
 
   header h1 {
-    font-size: 2rem;
+    display: none;
   }
 
-  img.logo {
+  header #mylogo {
     display: block;
+    width: 120px;
   }
+
+  main {
+    width: 80%;
+    margin: 0 auto;
+  }
+
 
   footer ul {
-    width: 100%;
-    justify-content: center;
     display: flex;
-    gap: 50px
+    gap: 50px;
+    margin-bottom: 5px;
   }
 
 }
