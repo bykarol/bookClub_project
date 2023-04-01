@@ -11,25 +11,28 @@
 </head>
 
 <body>
-  <header class="header-footer flex">
-    <img class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
-    <h1><a href="../index.html" title="Go to my Library">My Library</a>, a book-lovers place!</h1>
-    <img id="menuIcon" class="icon" src="./images/book.png" alt="Menu icon" title="See menu">
-  </header>
-  <form id="searchForm" name="searchForm">
-    <input type="search" id="searchIn" placeholder="Book title or book author">
-    <button type="submit" id="submitBtn">
-      <img id="searchIcon" class="icon" src="./images/search_Icon.png" alt="search icon">
-    </button>
-  </form>
-  <nav>
-    <ul>
-      <li><a href="./index.html">My Library Project</a></li>
-      <!-- <li><a href="#myReadings">My Readings</a></li> -->
-      <li><a href="#myFavorites">My Favorites</a></li>
-      <li><a href="./game/bookQuiz.html">Book Trivia</a></li>
-    </ul>
-  </nav>
+  <div id="header-wrapper">
+    <header class="header-footer flex">
+      <img class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
+      <h1><a href="../index.html" title="Go to my Library">My Library</a>, a book-lovers place!</h1>
+      <img id="menuIcon" class="icon menuIcon" src="./images/book.png" alt="Menu icon" title="See menu">
+    </header>
+    <img id="menuIcon2" class="icon menuIcon" src="./images/book.png" alt="Menu icon" title="See menu">
+    <form id="searchForm" name="searchForm">
+      <input type="search" id="searchIn" placeholder="Book title or book author">
+      <button type="submit" id="submitBtn">
+        <img id="searchIcon" class="icon" src="./images/search_Icon.png" alt="search icon">
+      </button>
+    </form>
+    <nav>
+      <ul>
+        <li><a href="./index.html">My Library Project</a></li>
+        <!-- <li><a href="#myReadings">My Readings</a></li> -->
+        <li><a href="#myFavorites">My Favorites</a></li>
+        <li><a href="./game/bookQuiz.html">Book Trivia</a></li>
+      </ul>
+    </nav>
+  </div>
   <main>
     <section id="bookList"></section>
     <section id="aboutUs">

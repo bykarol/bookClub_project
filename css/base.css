@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1pt red dashed; */
 }
 
 :root {
@@ -34,12 +33,16 @@ header h1 a {
   cursor: pointer;
 }
 
-#menuIcon {
+.menuIcon {
   width: 35px;
 }
 
-.icon#menuIcon:hover {
+.icon.menuIcon:hover {
   width: 37px;
+}
+
+#menuIcon2 {
+  display: none;
 }
 
 header img.logo {
@@ -108,6 +111,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 250px;
   font-family: var(--font-paragraph);
 }
 
@@ -133,6 +137,33 @@ footer #authorName {
 
 footer #authorName:hover {
   text-shadow: var(--text-shadow);
+}
+
+@media (min-width: 550px) {
+  #header-wrapper {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  form#searchForm {
+    width: 450px;
+    place-self: center;
+  }
+
+  #searchForm input {
+    flex-grow: 0;
+  }
+
+  header.header-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: var(--font-title);
+    color: var(--color-title);
+    font-weight: bold;
+    box-shadow: var(--box-shadow);
+  }
 }
 
 @media (min-width: 780px) {
