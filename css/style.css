@@ -85,6 +85,11 @@ main p {
   background-color: var(--bg-specialGreen);
 }
 
+.bookSection .likeBtn {
+  box-shadow: none;
+  width: 35px;
+}
+
 .bookSection p {
   margin-top: 0;
   background-color: var(--generic);

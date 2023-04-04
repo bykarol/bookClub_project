@@ -23,9 +23,13 @@ const view = {
   htmlMain: document.querySelector("main"),
   searchBtn: document.querySelector("#submitBtn"),
   inputUserEl: document.querySelector("#searchIn"),
+  htmlSection: document.createElement("section"),
   searchParam: "",
   volumeInfo: [],
-  htmlSection: document.createElement("section"),
+  myFavorites: [],
+  // saveBook(book) {
+
+  // },
 }
 
 const search = (e) => {
@@ -119,6 +123,31 @@ function prepareList() {
       const descriptionElement = document.createElement("p");
       descriptionElement.classList.add("hide");
       descriptionElement.textContent = description;
+      descriptionBtn.textContent = "Book Description";
+      descriptionBtnX.textContent = "X";
+      const likeElement = document.createElement("img");
+      likeElement.setAttribute("src", "./images/heart.png")
+      likeElement.setAttribute("alt", "dislike button");
+      likeElement.setAttribute("title", "Add to favorites");
+      likeElement.classList.add("likeBtn");
+      const dislikeElement = document.createElement("img");
+      dislikeElement.setAttribute("src", "./images/heartFilled.png");
+      dislikeElement.setAttribute("alt", "like button");
+      dislikeElement.setAttribute("title", "Dislike");
+      dislikeElement.classList.add("hide");
+      dislikeElement.classList.add("likeBtn");
+      //append in this order into the fragment
+      fragment.append(titleEl);
+      fragment.append(authorFragment);
+      fragment.append(imgEl);
+      fragment.append(likeElement);
+      fragment.append(dislikeElement);
+      fragment.append(descriptionBtn);
+      fragment.append(descriptionBtnX);
+      fragment.append(descriptionElement);
+      fragment.append(publishedEl);
+
+      //event handlers
       descriptionBtn.addEventListener("click", () => {
         descriptionBtn.classList.toggle("hide");
         descriptionBtnX.classList.toggle("hide");
@@ -129,15 +158,15 @@ function prepareList() {
         descriptionBtnX.classList.toggle("hide");
         descriptionElement.classList.toggle("hide");
       });
-      descriptionBtn.textContent = "Book Description";
-      descriptionBtnX.textContent = "X";
-      fragment.append(titleEl);
-      fragment.append(authorFragment);
-      fragment.append(imgEl);
-      fragment.append(descriptionBtn);
-      fragment.append(descriptionBtnX);
-      fragment.append(descriptionElement);
-      fragment.append(publishedEl);
+      likeElement.addEventListener("click", () => {
+        // saveBook();
+        likeElement.classList.toggle("hide");
+        dislikeElement.classList.toggle("hide");
+      });
+      dislikeElement.addEventListener("click", () => {
+        dislikeElement.classList.toggle("hide");
+        likeElement.classList.toggle("hide");
+      });
     } catch (error) {
       console.log(error.message)
     }
