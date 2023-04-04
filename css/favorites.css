@@ -1,0 +1,5 @@
+@import url(./style.css);
+
+form#searchForm {
+  display: none;
+}

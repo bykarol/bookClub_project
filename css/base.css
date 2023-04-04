@@ -23,6 +23,10 @@
   --text-shadow: 1px 1px 1px var(--color-paragraph);
 }
 
+.hide {
+  display: none;
+}
+
 /* HEADER */
 header h1 a {
   text-decoration: none;

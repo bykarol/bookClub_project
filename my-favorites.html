@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Karol Bracho">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>My Personal Library</title>
+  <link rel="stylesheet" href="./css/favorites.css">
+  <title>My Favorite Books</title>
 </head>
 
-<body>
+<body onload="showFavorites()">
   <div id="header-wrapper">
     <header class="header-footer flex">
       <img id="mylogo" class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
@@ -26,25 +26,15 @@
     </form>
     <nav>
       <ul>
-        <li class="active"><a href="./index.html">My Library Project</a></li>
+        <li><a href="./index.html">My Library Project</a></li>
         <!-- <li><a href="#myReadings">My Readings</a></li> -->
-        <li><a href="./my-favorites.html">My Favorites</a></li>
+        <li class="active"><a href="./my-favorites.html">My Favorites</a></li>
         <li><a href="./game/bookQuiz.html">Book Trivia</a></li>
       </ul>
     </nav>
   </div>
   <main>
-    <section id="bookList"></section>
-    <section id="aboutUs">
-      <h2>About My Library</h2>
-      <img class="logo" src="./images/myLibray-logo.png" alt="My Library Logo">
-      <p>In this site you can search books and mark them, this way you track your favorites ones,
-        either to read them later or because you have already read them. All in just one place, you
-        can check it on "My Favorites".</p>
-      <p>Our main purpose is to promote reading and becoming a meeting place where you can share with other
-        reading-lovers.
-      </p>
-    </section>
+
   </main>
   <footer class="header-footer">
     <ul>
@@ -54,7 +44,7 @@
             Bracho</span></a></li>
     </ul>
   </footer>
-  <script type="module" src="./js/main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 
 </html>

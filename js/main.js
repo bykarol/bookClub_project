@@ -17,7 +17,7 @@ async function getData() {
 }
 
 //main module
-const localstorage = window.localStorage.getItem("myFavorites");
+const localstorage = window.localStorage.getItem("favoritesBooks");
 const view = {
   menuBtn: document.querySelector("#menuIcon"),
   htmlNav: document.querySelector("nav"),
@@ -27,11 +27,7 @@ const view = {
   htmlSection: document.createElement("section"),
   searchParam: "",
   volumeInfo: [],
-  myFavorites: localstorage ? JSON.parse(localstorage).book : [],
-  saveFavoriteBook() {
-    const favoritesJson = JSON.stringify(this.myFavorites);
-    window.localStorage.setItem("myFavorites", favoritesJson);
-  },
+  myFavorites: localstorage ? JSON.parse(localstorage) : [],
 }
 
 const search = (e) => {
@@ -47,84 +43,67 @@ const search = (e) => {
   }
 }
 
-function testing(text, something) { //clear
-  console.log(text, something);
-}
-
 // //utils module
 function volumeInfoExtractor(itemsData) {
   for (const volume of itemsData) {
     view.volumeInfo.push(volume.volumeInfo);
   }
-  prepareList();
+  prepareList(view.volumeInfo);
 }
 
 //Book List class
-function prepareList() {
+function prepareList(data) {
   const fragment = document.createDocumentFragment();
-  view.volumeInfo.forEach(finalData => {
+  data.forEach(finalData => {
     try {
-      let title = "N/A";
-      let publisher = "N/A";
-      let description = "N/A";
-      let publishedDate = "N/A";
-      // let preview = "N/A";
+      const bookObj = {
+        title: finalData.title ? finalData.title : "N/A",
+        publisher: finalData.publisher ? finalData.publisher : "N/A",
+        description: finalData.description ? finalData.description : "N/A",
+        publishedDate: finalData.publishedDate ? finalData.publishedDate : "N/A",
+        //preview: "N/A",
+        coverImg: "../images/cover-placeholder.png",
+        authors: finalData.authors,
+        like: false,
+      }
 
-      if (finalData.title) {
-        title = finalData.title;
-      }
-      if (finalData.publisher) {
-        publisher = finalData.publisher;
-      }
-      if (finalData.description) {
-        description = finalData.description;
-      }
-      if (finalData.publishedDate) {
-        publishedDate = finalData.publishedDate;
-      }
-      // if (finalData.previewLink) {
-      //   preview = finalData.previewLink;
-      // }
-      let coverImg;
       if (finalData.imageLinks) {
         if (finalData.imageLinks.thumbnail) {
-          coverImg = finalData.imageLinks.thumbnail;
+          bookObj.coverImg = finalData.imageLinks.thumbnail;
         }
         else {
-          coverImg = finalData.imageLinks.smallThumbnail;
+          bookObj.coverImg = finalData.imageLinks.smallThumbnail;
         }
-      } else {
-        coverImg = "../images/cover-placeholder.png";
       }
-      let authors = finalData.authors;
+      //it could be several authors
       const authorFragment = document.createDocumentFragment();
-      if (authors.length > 1) {
-        for (let i = 0; i < authors.length; i++) {
+      if (bookObj.authors.length > 1) {
+        for (let i = 0; i < bookObj.authors.length; i++) {
           const authorEl = document.createElement("h3");
-          authorEl.textContent = `Author: ${authors[i]}`;
+          authorEl.textContent = `Author: ${bookObj.authors[i]}`;
           authorFragment.append(authorEl);
         }
       } else {
         const authorEl = document.createElement("h3");
-        authorEl.textContent = `By ${authors[0]}`;
+        authorEl.textContent = `By ${bookObj.authors[0]}`;
         authorFragment.append(authorEl);
       }
       //create html elements and setting attributes and values
       const imgEl = document.createElement("img");
       imgEl.classList.add("coverBook");
-      imgEl.setAttribute("src", `${coverImg}`);
-      imgEl.setAttribute("alt", `${title}`);
+      imgEl.setAttribute("src", `${bookObj.coverImg}`);
+      imgEl.setAttribute("alt", `${bookObj.title}`);
       const titleEl = document.createElement("h2");
-      titleEl.textContent = title;
+      titleEl.textContent = bookObj.title;
       const publishedEl = document.createElement("h4");
-      publishedEl.textContent = `Published by ${publisher}. (${publishedDate})`;
+      publishedEl.textContent = `Published by ${bookObj.publisher}. (${bookObj.publishedDate})`;
       const descriptionBtn = document.createElement("button");
       const descriptionBtnX = document.createElement("button");
       descriptionBtnX.classList.add("hide");
       descriptionBtnX.classList.add("btnX");
       const descriptionElement = document.createElement("p");
       descriptionElement.classList.add("hide");
-      descriptionElement.textContent = description;
+      descriptionElement.textContent = bookObj.description;
       descriptionBtn.textContent = "Book Description";
       descriptionBtnX.textContent = "X";
       const likeElement = document.createElement("img");
@@ -149,7 +128,7 @@ function prepareList() {
       fragment.append(descriptionElement);
       fragment.append(publishedEl);
 
-      //event handlers
+      //event handlers like btn and see description
       descriptionBtn.addEventListener("click", () => {
         descriptionBtn.classList.toggle("hide");
         descriptionBtnX.classList.toggle("hide");
@@ -163,11 +142,13 @@ function prepareList() {
       likeElement.addEventListener("click", () => {
         likeElement.classList.toggle("hide");
         dislikeElement.classList.toggle("hide");
-        // view.saveFavoriteBook(); todo
+        bookObj.like = true;
+        addBook(bookObj);
       });
       dislikeElement.addEventListener("click", () => {
         dislikeElement.classList.toggle("hide");
         likeElement.classList.toggle("hide");
+        bookObj.like = false;
       });
     } catch (error) {
       console.log(error.message)
@@ -188,6 +169,22 @@ function render(displayInfo) {
   }
 }
 
+const saveBook = () => {
+  const favoritesJson = JSON.stringify(view.myFavorites);
+  window.localStorage.setItem("favoritesBooks", favoritesJson);
+}
+
+const addBook = (obj) => {
+  view.myFavorites.push(obj);
+  saveBook();
+}
+
+const deleteBook = () => {
+
+}
+const showFavorites = () => {
+  prepareList(view.myFavorites);
+}
 
 view.searchBtn.addEventListener("click", search);
 view.menuBtn.addEventListener("click", (e) => {
