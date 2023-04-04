@@ -1,5 +1,74 @@
 @import url(./style.css);
 
+section h2 {
+  margin-bottom: 10px;
+  color: var(--color-title);
+  text-shadow: var(--text-shadow);
+}
+
 form#searchForm {
   display: none;
+}
+
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+section img.logo {
+  max-width: 150px;
+  align-self: center;
+}
+
+main section a {
+  text-decoration: none;
+  color: var(--bg-specialGreen);
+  font-weight: bold;
+}
+
+@media (min-width: 780px) {
+  section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "title image"
+      "subtitle image"
+      "p1 image"
+      "p2 image"
+      "p3 image";
+  }
+
+  section p {
+    text-align: right;
+  }
+
+  section #p1 {
+    grid-area: p1;
+  }
+
+  section #p2 {
+    grid-area: p2;
+  }
+
+  section #p3 {
+    grid-area: p3;
+  }
+
+  section h2 {
+    text-align: right;
+    grid-area: title;
+  }
+
+  section h3 {
+    grid-area: subtitle;
+    text-align: right;
+  }
+
+  section img.logo {
+    grid-area: image;
+    margin-left: 20px;
+  }
+
 }

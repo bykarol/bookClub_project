@@ -183,7 +183,9 @@ const deleteBook = () => {
 
 }
 const showFavorites = () => {
-  prepareList(view.myFavorites);
+  if (view.myFavorites.length !== 0) {
+    prepareList(view.myFavorites);
+  }
 }
 
 view.searchBtn.addEventListener("click", search);
