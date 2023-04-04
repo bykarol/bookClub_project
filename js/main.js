@@ -17,6 +17,7 @@ async function getData() {
 }
 
 //main module
+const localstorage = window.localStorage.getItem("myFavorites");
 const view = {
   menuBtn: document.querySelector("#menuIcon"),
   htmlNav: document.querySelector("nav"),
@@ -26,10 +27,11 @@ const view = {
   htmlSection: document.createElement("section"),
   searchParam: "",
   volumeInfo: [],
-  myFavorites: [],
-  // saveBook(book) {
-
-  // },
+  myFavorites: localstorage ? JSON.parse(localstorage).book : [],
+  saveFavoriteBook() {
+    const favoritesJson = JSON.stringify(this.myFavorites);
+    window.localStorage.setItem("myFavorites", favoritesJson);
+  },
 }
 
 const search = (e) => {
@@ -159,9 +161,9 @@ function prepareList() {
         descriptionElement.classList.toggle("hide");
       });
       likeElement.addEventListener("click", () => {
-        // saveBook();
         likeElement.classList.toggle("hide");
         dislikeElement.classList.toggle("hide");
+        // view.saveFavoriteBook(); todo
       });
       dislikeElement.addEventListener("click", () => {
         dislikeElement.classList.toggle("hide");
