@@ -60,9 +60,9 @@ function prepareList() {
     try {
       let title = "N/A";
       let publisher = "N/A";
-      // const description = "N/A";
+      let description = "N/A";
       let publishedDate = "N/A";
-      // const preview = "N/A";
+      // let preview = "N/A";
 
       if (finalData.title) {
         title = finalData.title;
@@ -70,14 +70,14 @@ function prepareList() {
       if (finalData.publisher) {
         publisher = finalData.publisher;
       }
-      // if (finalData.volumeInfo.description) {
-      //   description = finalData.volumeInfo.description;
-      // }
+      if (finalData.description) {
+        description = finalData.description;
+      }
       if (finalData.publishedDate) {
         publishedDate = finalData.publishedDate;
       }
-      // if (finalData.volumeInfo.previewLink) {
-      //   preview = finalData.volumeInfo.previewLink;
+      // if (finalData.previewLink) {
+      //   preview = finalData.previewLink;
       // }
       let coverImg;
       if (finalData.imageLinks) {
@@ -112,9 +112,31 @@ function prepareList() {
       titleEl.textContent = title;
       const publishedEl = document.createElement("h4");
       publishedEl.textContent = `Published by ${publisher}. (${publishedDate})`;
+      const descriptionBtn = document.createElement("button");
+      const descriptionBtnX = document.createElement("button");
+      descriptionBtnX.classList.add("hide");
+      descriptionBtnX.classList.add("btnX");
+      const descriptionElement = document.createElement("p");
+      descriptionElement.classList.add("hide");
+      descriptionElement.textContent = description;
+      descriptionBtn.addEventListener("click", () => {
+        descriptionBtn.classList.toggle("hide");
+        descriptionBtnX.classList.toggle("hide");
+        descriptionElement.classList.toggle("hide");
+      });
+      descriptionBtnX.addEventListener("click", () => {
+        descriptionBtn.classList.toggle("hide");
+        descriptionBtnX.classList.toggle("hide");
+        descriptionElement.classList.toggle("hide");
+      });
+      descriptionBtn.textContent = "Book Description";
+      descriptionBtnX.textContent = "X";
       fragment.append(titleEl);
       fragment.append(authorFragment);
       fragment.append(imgEl);
+      fragment.append(descriptionBtn);
+      fragment.append(descriptionBtnX);
+      fragment.append(descriptionElement);
       fragment.append(publishedEl);
     } catch (error) {
       console.log(error.message)
