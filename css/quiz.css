@@ -17,53 +17,76 @@ main p {
   margin: 3px;
 }
 
-h2 {
-  font-size: 2rem;
-}
-
 /* trivia elements */
 main p:nth-child(2) {
-  background-color: var(--bg-specialGreen);
+  width: 100%;
   border-radius: 5px;
-  color: var(--generic);
-  box-shadow: var(--box-shadow);
+  font-weight: bold;
+  text-shadow: var(--text-shadow);
 }
 
 main ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 main ul li {
-  min-height: 70px;
-  min-width: 120px;
+  min-height: 60px;
+  width: 240px;
   margin: 10px;
   padding: 10px;
   background-color: var(--color-title);
   color: var(--generic);
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+main ul li::before {
+  padding-right: 10px;
+  color: var(--bg-specialPink);
+  font-weight: bold;
+}
+
+main ul li:first-child:before {
+  content: "A.";
+}
+
+main ul li:nth-child(2)::before {
+  content: "B.";
+}
+
+main ul li:nth-child(3)::before {
+  content: "C.";
+}
+
+main ul li:nth-child(4)::before {
+  content: "D.";
 }
 
 main ul li:hover {
   font-weight: bold;
+  border: solid 2pt gainsboro;
+}
+
+main ol {
+  background-color: rgb(35, 35, 35);
+  padding: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   box-shadow: var(--box-shadow);
 }
 
 .finalScoreList {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background-color: transparent;
-  cursor: none;
-  color: var(--color-title);
-  margin: 0;
-  padding: 0;
+  list-style-type: none;
+  cursor: text;
+  color: var(--bg-specialPink);
 }
 
-.finalScoreList:hover {
-  box-shadow: none;
+.finalScoreList:first-child {
+  color: var(--generic);
 }
 
 /*div results*/
@@ -85,19 +108,33 @@ main ul li:hover {
   background-color: red;
 }
 
-/* .hide {
-  display: none;
-} */
-
-/*buttons*/
+/*input and buttons*/
 .button {
   text-align: center;
   background-color: var(--bg-specialGreen);
   padding: .6rem 4rem;
-  font-size: var(--font-title);
+  font-family: var(--font-title);
   color: var(--generic);
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   cursor: pointer;
+  margin-top: 10px;
+}
+
+#username {
+  padding: .6rem;
+  margin-bottom: 10px;
+  font-size: .9rem;
+}
+
+@media (min-width: 700px) {
+  main p:nth-child(2) {
+    width: 80%;
+  }
+
+  main ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }

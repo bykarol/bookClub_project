@@ -29,7 +29,7 @@ const rndGenerator = (questionsLength) => {
 
 const questionShuffle = () => {
   let shuffleQuestions = [];
-  while (shuffleQuestions.length < view.arrayQuestions.length) {
+  while (shuffleQuestions.length < view.qtyQuestions) {
     const rdnNum = rndGenerator(view.arrayQuestions.length);
     if (!shuffleQuestions.includes(view.arrayQuestions[rdnNum])) {
       shuffleQuestions.push(view.arrayQuestions[rdnNum]);
@@ -38,7 +38,10 @@ const questionShuffle = () => {
   view.arrayQuestions = shuffleQuestions;
 }
 
+// const localstorage = window.localStorage.getItem("rankingScores");
 const view = {
+  // arrayScores: localstorage ? JSON.parse(localstorage).rankingScores : [],
+  // arrayRanking: [],
   score: 0,
   arrayScores: [],
   startBtnEl: document.querySelector("#q-btnStart"),
@@ -46,6 +49,8 @@ const view = {
   answerChecked: undefined,
   arrayQuestions: [],
   qIndex: 0,
+  userName: undefined,
+  qtyQuestions: 6,
   setup() {
     this.mainEl.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -74,16 +79,29 @@ const view = {
   },
   reset() {
     this.qIndex = 0;
-    if (this.arrayScores.length < 5) {
-      this.arrayScores.unshift(this.score);
+    this.score = 0;
+    this.answerChecked = undefined;
+  },
+  inputName() {
+    const userNameElement = document.querySelector("#username");
+    if (userNameElement.value) {
+      this.userName = userNameElement.value;
     }
     else {
-      this.arrayScores.shift();
-      this.arrayScores.push(this.score);
+      this.userName = "Unknown";
     }
-    this.score = 0;
+  },
+  orderRanking() {
+    this.arrayScores.sort((a, b) => {
+      return b - a;
+    })
   },
 }
+
+// const saveScoreInLocalStorage = () => {
+//   const rankingStringify = JSON.stringify(view.arrayRanking);
+//   window.localStorage.setItem("rankingScores", rankingStringify);
+// }
 
 const checkAnswer = (ev) => {
   const userAnswer = ev.target.textContent;
@@ -104,6 +122,15 @@ const checkAnswer = (ev) => {
     view.qIndex += 1;
     view.setup();
     if (view.qIndex === view.arrayQuestions.length - 1) {
+      if (view.arrayScores.length < 5) {
+        view.arrayScores.push(view.score);
+      }
+      else {
+        view.arrayScores.pop();
+        view.arrayScores.push(view.score);
+      }
+      // saveScoreInLocalStorage();
+      view.orderRanking();
       gameOver();
     }
   }
@@ -117,17 +144,19 @@ const gameOver = () => {
   const olScores = document.createElement("ol");
   const h3Element = document.createElement("h3");
   if (view.arrayScores.length > 0) {
-    h3Element.textContent = "Last Scores";
+    h3Element.textContent = "Ranking Top 5";
     for (let i = 0; i < view.arrayScores.length; i++) {
       const liScoreElement = document.createElement("li");
-      liScoreElement.textContent = `Game #${i + 1} - Final Score: ${view.arrayScores[i]}`;
+      liScoreElement.textContent = `#${i + 1} - ${view.userName} - score: ${view.arrayScores[i]}`;
       liScoreElement.classList.add("finalScoreList");
       olScores.append(liScoreElement);
+      //push into the array ranking to save it in localstorage
+      // view.arrayRanking.push(liScoreElement.textContent);
     }
   }
   buttonElement.textContent = "Play Again";
   buttonElement.classList.add("button");
-  scoreElement.textContent = `Final Score: ${view.score}`;
+  scoreElement.textContent = `Your Score: ${view.score}/${view.qtyQuestions - 1}`;
   lastFragment.append(scoreElement);
   lastFragment.append(h3Element);
   lastFragment.append(olScores);
@@ -144,6 +173,7 @@ const playAgain = (e) => {
 }
 
 const start = () => {
+  view.inputName();
   questionShuffle();
   view.setup();
 }
