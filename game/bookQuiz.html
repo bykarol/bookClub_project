@@ -17,23 +17,23 @@
 <body>
   <div id="header-wrapper">
     <header class="header-footer">
-      <img id="mylogo" class="logo" src="../images/myLibray-logo.png" alt="My Library Logo">
+      <a href="../index.html"><img id="mylogo" class="logo" src="../images/myLibray-logo.png" alt="My Library Logo"></a>
       <h1><a href="../index.html" title="Go to my Library">My Library</a>, a book-lovers place!</h1>
-      <a title="Refresh" href="./bookQuiz.html"><img id="menuIcon" class="icon menuIcon" src="../images/book.png"
+      <a title="Restart" href="./bookQuiz.html"><img id="menuIcon" class="icon menuIcon" src="../images/replay.png"
           alt="Menu icon"></a>
     </header>
-    <img id="menuIcon2" class="icon menuIcon" src="../images/book.png" alt="Menu icon" title="See menu">
     <nav>
       <ul>
         <li><a href="../index.html">My Library Project</a></li>
         <!-- <li><a href="#myReadings">My Readings</a></li> -->
         <li><a href="../my-favorites.html">My Favorites</a></li>
-        <li class="active"><a href="./bookQuiz.html">Play Again</a></li>
+        <li class="active"><a href="./bookQuiz.html">Restart Trivia</a></li>
       </ul>
     </nav>
   </div>
   <main id="q-main" class="flex">
-    <h2>Are you ready???</h2>
+    <!-- <h2>Are you ready???</h2> -->
+    <input id="username" type="text" placeholder="Type your name">
     <button id="q-btnStart" class="button">Start</button>
     <p id="q-score">Score: 0</p>
   </main>

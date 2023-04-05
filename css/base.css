@@ -54,6 +54,11 @@ header img.logo {
   display: none;
 }
 
+main img.logo {
+  width: 130px;
+  padding-left: 10px;
+}
+
 .header-footer {
   width: 100%;
   display: flex;
