@@ -148,6 +148,8 @@ function prepareList(data) {
         dislikeElement.classList.toggle("hide");
         likeElement.classList.toggle("hide");
         bookObj.like = false;
+        saveBook();
+        clearBook(bookObj);
       });
     } catch (error) {
       console.log(error.message)
@@ -175,6 +177,15 @@ view.menuBtn.addEventListener("click", (e) => {
 });
 
 //Localstorage implementation (my Favorites)
+const clearBook = (obj) => {
+  view.myFavorites.forEach((book, index) => {
+    if (book.title === obj.title && book.publisher === obj.publisher && book.publishedDate === obj.publishedDate) {
+      view.myFavorites.splice(index, 1);
+    }
+  });
+  saveBook();
+}
+
 const addBook = (obj) => {
   view.myFavorites.push(obj);
   saveBook();
@@ -185,16 +196,107 @@ const saveBook = () => {
   window.localStorage.setItem("favoritesBooks", favoritesJson);
 }
 
-const deleteBook = () => {
-
+const deleteBook = (obj) => {
+  view.myFavorites.forEach((book, index) => {
+    if (book.title === obj.title && book.publisher === obj.publisher && book.publishedDate === obj.publishedDate) {
+      view.myFavorites.splice(index, 1);
+    }
+  });
+  saveBook();
+  if (view.myFavorites.length === 0) {
+    location.reload();
+  }
+  showFavorites();
 }
 
 function prepareFavorites(data) {
-  data.forEach((element) => {
-    console.log(element);
+  const fragment = document.createDocumentFragment();
+  data.forEach(element => {
+    try {
+      const favbookObj = {
+        title: element.title,
+        publisher: element.publisher,
+        description: element.description,
+        publishedDate: element.publishedDate,
+        coverImg: element.coverImg,
+        authors: element.authors,
+        like: element.like,
+      }
 
+      //it could be several authors
+      const authorFragment = document.createDocumentFragment();
+      if (favbookObj.authors.length > 1) {
+        for (let i = 0; i < favbookObj.authors.length; i++) {
+          const authorEl = document.createElement("h3");
+          authorEl.textContent = `Author: ${favbookObj.authors[i]}`;
+          authorFragment.append(authorEl);
+        }
+      } else {
+        const authorEl = document.createElement("h3");
+        authorEl.textContent = `By ${favbookObj.authors[0]}`;
+        authorFragment.append(authorEl);
+      }
+      //create html elements and setting attributes and values
+      const imgEl = document.createElement("img");
+      imgEl.classList.add("coverBook");
+      imgEl.setAttribute("src", `${favbookObj.coverImg}`);
+      imgEl.setAttribute("alt", `${favbookObj.title}`);
+      const titleEl = document.createElement("h2");
+      titleEl.textContent = favbookObj.title;
+      const publishedEl = document.createElement("h4");
+      publishedEl.textContent = `Published by ${favbookObj.publisher}. (${favbookObj.publishedDate})`;
+      const descriptionBtn = document.createElement("button");
+      const descriptionBtnX = document.createElement("button");
+      descriptionBtnX.classList.add("hide");
+      descriptionBtnX.classList.add("btnX");
+      const descriptionElement = document.createElement("p");
+      descriptionElement.classList.add("hide");
+      descriptionElement.textContent = favbookObj.description;
+      descriptionBtn.textContent = "Book Description";
+      descriptionBtnX.textContent = "X";
+      const dislikeElement = document.createElement("img");
+      dislikeElement.setAttribute("src", "./images/heartFilled.png");
+      dislikeElement.setAttribute("alt", "like button");
+      dislikeElement.setAttribute("title", "Dislike");
+      dislikeElement.classList.add("likeBtn");
+      //append in this order into the fragment
+      fragment.append(titleEl);
+      fragment.append(authorFragment);
+      fragment.append(imgEl);
+      fragment.append(dislikeElement);
+      fragment.append(descriptionBtn);
+      fragment.append(descriptionBtnX);
+      fragment.append(descriptionElement);
+      fragment.append(publishedEl);
+
+      //event handlers like btn and see description
+      descriptionBtn.addEventListener("click", () => {
+        descriptionBtn.classList.toggle("hide");
+        descriptionBtnX.classList.toggle("hide");
+        descriptionElement.classList.toggle("hide");
+      });
+      descriptionBtnX.addEventListener("click", () => {
+        descriptionBtn.classList.toggle("hide");
+        descriptionBtnX.classList.toggle("hide");
+        descriptionElement.classList.toggle("hide");
+      });
+      dislikeElement.addEventListener("click", () => {
+        dislikeElement.classList.toggle("hide");
+        favbookObj.like = false;
+        deleteBook(favbookObj);
+      });
+    } catch (error) {
+      console.log(error.message)
+    }
   });
+  render(fragment);
 }
+
+function renderFavorites(data) {
+  const mainMyfav = document.querySelector("#myFav");
+  mainMyfav.append(data);
+}
+
 const showFavorites = () => {
   if (view.myFavorites.length !== 0) {
     prepareFavorites(view.myFavorites);
