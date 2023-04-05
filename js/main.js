@@ -16,8 +16,8 @@ async function getData() {
   }
 }
 
-//main module
 const localstorage = window.localStorage.getItem("favoritesBooks");
+//main module (my Library project home page)
 const view = {
   menuBtn: document.querySelector("#menuIcon"),
   htmlNav: document.querySelector("nav"),
@@ -66,7 +66,6 @@ function prepareList(data) {
         authors: finalData.authors,
         like: false,
       }
-
       if (finalData.imageLinks) {
         if (finalData.imageLinks.thumbnail) {
           bookObj.coverImg = finalData.imageLinks.thumbnail;
@@ -169,29 +168,38 @@ function render(displayInfo) {
   }
 }
 
-const saveBook = () => {
-  const favoritesJson = JSON.stringify(view.myFavorites);
-  window.localStorage.setItem("favoritesBooks", favoritesJson);
-}
-
-const addBook = (obj) => {
-  view.myFavorites.push(obj);
-  saveBook();
-}
-
-const deleteBook = () => {
-
-}
-const showFavorites = () => {
-  if (view.myFavorites.length !== 0) {
-    prepareList(view.myFavorites);
-  }
-}
-
 view.searchBtn.addEventListener("click", search);
 view.menuBtn.addEventListener("click", (e) => {
   e.preventDefault();
   view.htmlNav.classList.toggle("open");
 });
+
+//Localstorage implementation (my Favorites)
+const addBook = (obj) => {
+  view.myFavorites.push(obj);
+  saveBook();
+}
+
+const saveBook = () => {
+  const favoritesJson = JSON.stringify(view.myFavorites);
+  window.localStorage.setItem("favoritesBooks", favoritesJson);
+}
+
+const deleteBook = () => {
+
+}
+
+function prepareFavorites(data) {
+  data.forEach((element) => {
+    console.log(element);
+
+  });
+}
+const showFavorites = () => {
+  if (view.myFavorites.length !== 0) {
+    prepareFavorites(view.myFavorites);
+  }
+}
+
 
 
