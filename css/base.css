@@ -177,7 +177,8 @@ footer #authorName:hover {
   }
 
   #header-wrapper {
-    grid-template-columns: 1fr 3fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: none;
     grid-template-areas: "headerArea navArea searchArea";
     place-items: center;

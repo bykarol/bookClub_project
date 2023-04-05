@@ -177,6 +177,7 @@ view.menuBtn.addEventListener("click", (e) => {
 });
 
 //Localstorage implementation (my Favorites)
+//function that delete the book in localstorage but still render the book in index.html
 const clearBook = (obj) => {
   view.myFavorites.forEach((book, index) => {
     if (book.title === obj.title && book.publisher === obj.publisher && book.publishedDate === obj.publishedDate) {
@@ -186,16 +187,19 @@ const clearBook = (obj) => {
   saveBook();
 }
 
+//Add the new favBook into an array
 const addBook = (obj) => {
   view.myFavorites.push(obj);
   saveBook();
 }
 
+//store the array in the localstorage
 const saveBook = () => {
   const favoritesJson = JSON.stringify(view.myFavorites);
   window.localStorage.setItem("favoritesBooks", favoritesJson);
 }
 
+//function that delete the book in localsotrage and get rid it from the main in myFavorites.html
 const deleteBook = (obj) => {
   view.myFavorites.forEach((book, index) => {
     if (book.title === obj.title && book.publisher === obj.publisher && book.publishedDate === obj.publishedDate) {
@@ -209,6 +213,7 @@ const deleteBook = (obj) => {
   showFavorites();
 }
 
+//prepare the list to be render in myfavorites.html
 function prepareFavorites(data) {
   const fragment = document.createDocumentFragment();
   data.forEach(element => {
@@ -222,7 +227,6 @@ function prepareFavorites(data) {
         authors: element.authors,
         like: element.like,
       }
-
       //it could be several authors
       const authorFragment = document.createDocumentFragment();
       if (favbookObj.authors.length > 1) {
@@ -292,6 +296,7 @@ function prepareFavorites(data) {
   render(fragment);
 }
 
+//render the favorites books in myfavorites.html
 function renderFavorites(data) {
   const mainMyfav = document.querySelector("#myFav");
   mainMyfav.append(data);
