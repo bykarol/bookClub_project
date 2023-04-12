@@ -20,8 +20,8 @@ const rndGenerator = (max) => {
   return Math.floor(Math.random() * (max));
 }
 
-//Using Fisher–Yates algorithm
-//Explained in spanish https://www.youtube.com/watch?v=0eKNvuPNLos
+/*Using Fisher–Yates algorithm Explained in spanish
+ https://www.youtube.com/watch?v=0eKNvuPNLos*/
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = rndGenerator(i + 1);
@@ -98,33 +98,38 @@ const view = {
 const checkAnswer = (ev) => {
   const userAnswer = ev.target.textContent;
   let pResult = document.createElement("p");
+  if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
+    pResult.classList.add("correct");
+    pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
+    view.answerChecked = pResult;
+    view.score += 1;
+  }
+  else {
+    pResult.classList.add("wrong");
+    pResult.textContent = `Wrong!!!. The correct answer is: ${view.arrayQuestions[view.qIndex].correct}`;
+    view.answerChecked = pResult;
+  }
+  view.qIndex += 1;
+  //displaying just till the last question
   if (view.qIndex < view.arrayQuestions.length) {
-    if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
-      // console.log("Good!!");
-      pResult.classList.add("correct");
-      pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
-      view.answerChecked = pResult;
-      view.score += 1;
+    view.setup();
+  }
+  //filling the ranking
+  if (view.qIndex === view.arrayQuestions.length) {
+    if (view.arrayScores.length < 5) {
+      view.arrayScores.push(view.score);
     }
     else {
-      pResult.classList.add("wrong");
-      pResult.textContent = `Wrong!!!. The correct answer is: ${view.arrayQuestions[view.qIndex].correct}`;
-      view.answerChecked = pResult;
-    }
-    view.qIndex += 1;
-    view.setup();
-    if (view.qIndex === view.arrayQuestions.length - 1) {
-      if (view.arrayScores.length < 5) {
-        view.arrayScores.push(view.score);
+      for (let i = 0; i < view.arrayScores.length; i++) {
+        if (view.score > view.arrayScores[i]) {
+          view.arrayScores.pop();
+          view.arrayScores.push(view.score);
+        }
       }
-      else {
-        view.arrayScores.pop();
-        view.arrayScores.push(view.score);
-      }
-      // saveScoreInLocalStorage();
-      view.orderRanking();
-      gameOver();
     }
+    // saveScoreInLocalStorage();
+    view.orderRanking();
+    gameOver();
   }
 }
 
@@ -148,7 +153,7 @@ const gameOver = () => {
   }
   buttonElement.textContent = "Play Again";
   buttonElement.classList.add("button");
-  scoreElement.textContent = `Your Score: ${view.score}/${view.qtyQuestions - 1}`;
+  scoreElement.textContent = `Your Score: ${view.score}/${view.qtyQuestions}`;
   lastFragment.append(scoreElement);
   lastFragment.append(h3Element);
   lastFragment.append(olScores);
