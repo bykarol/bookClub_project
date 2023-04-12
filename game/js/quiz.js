@@ -44,6 +44,15 @@ const view = {
   userName: undefined,
   qtyQuestions: 10,
   spotsInRanking: 5,
+  inputName() {
+    const userNameElement = document.querySelector("#username");
+    if (userNameElement.value) {
+      this.userName = userNameElement.value;
+    }
+    else {
+      this.userName = "Unknown";
+    }
+  },
   setup() {
     this.mainEl.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -74,15 +83,6 @@ const view = {
     this.qIndex = 0;
     this.score = 0;
     this.answerChecked = undefined;
-  },
-  inputName() {
-    const userNameElement = document.querySelector("#username");
-    if (userNameElement.value) {
-      this.userName = userNameElement.value;
-    }
-    else {
-      this.userName = "Unknown";
-    }
   },
   orderRanking() {
     this.arrayScores.sort((a, b) => {
