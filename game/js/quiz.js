@@ -43,6 +43,7 @@ const view = {
   qIndex: 0,
   userName: undefined,
   qtyQuestions: 10,
+  spotsInRanking: 5,
   setup() {
     this.mainEl.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -110,13 +111,13 @@ const checkAnswer = (ev) => {
     view.answerChecked = pResult;
   }
   view.qIndex += 1;
-  //displaying just till the last question
-  if (view.qIndex < view.arrayQuestions.length) {
+  //displaying just till n quantity of questions
+  if (view.qIndex < view.qtyQuestions) { //check
     view.setup();
   }
   //filling the ranking
-  if (view.qIndex === view.arrayQuestions.length) {
-    if (view.arrayScores.length < 5) {
+  if (view.qIndex === view.qtyQuestions) {
+    if (view.arrayScores.length < view.spotsInRanking) {
       view.arrayScores.push(view.score);
     }
     else {
@@ -141,7 +142,7 @@ const gameOver = () => {
   const olScores = document.createElement("ol");
   const h3Element = document.createElement("h3");
   if (view.arrayScores.length > 0) {
-    h3Element.textContent = "Ranking Top 5";
+    h3Element.textContent = `Ranking Top ${view.spotsInRanking}`;
     for (let i = 0; i < view.arrayScores.length; i++) {
       const liScoreElement = document.createElement("li");
       liScoreElement.textContent = `#${i + 1} - ${view.userName} - score: ${view.arrayScores[i]}`;
