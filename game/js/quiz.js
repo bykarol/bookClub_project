@@ -7,7 +7,7 @@ async function getData() {
       return [];
     }
     let bookData = await response.json();
-    data(bookData);
+    // data(bookData); CLEAR
     return bookData;
   } catch (error) {
     console.error("Error:: ", error.message);
@@ -23,19 +23,18 @@ const data = (questions) => {
   }
 }
 
-const rndGenerator = (questionsLength) => {
-  return Math.floor(Math.random() * (questionsLength));
+const rndGenerator = (max) => {
+  return Math.floor(Math.random() * (max));
 }
 
-const questionShuffle = () => {
-  let shuffleQuestions = [];
-  while (shuffleQuestions.length < view.qtyQuestions) {
-    const rdnNum = rndGenerator(view.arrayQuestions.length);
-    if (!shuffleQuestions.includes(view.arrayQuestions[rdnNum])) {
-      shuffleQuestions.push(view.arrayQuestions[rdnNum]);
-    }
+//Using Fisher–Yates algorithm
+//Explained in spanish https://www.youtube.com/watch?v=0eKNvuPNLos
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = rndGenerator(i + 1);
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  view.arrayQuestions = shuffleQuestions;
+  return array;
 }
 
 // const localstorage = window.localStorage.getItem("rankingScores");
@@ -50,7 +49,7 @@ const view = {
   arrayQuestions: [],
   qIndex: 0,
   userName: undefined,
-  qtyQuestions: 6,
+  qtyQuestions: 10,
   setup() {
     this.mainEl.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -165,19 +164,30 @@ const gameOver = () => {
   buttonElement.addEventListener("click", playAgain);
 }
 
-const playAgain = (e) => {
+const playAgain = async (e) => {
   e.preventDefault();
+  //reset values
   view.reset();
-  questionShuffle();
+  //shuffle again
+  view.arrayQuestions = shuffleArray(await getData());
+  view.arrayQuestions.forEach(question => {
+    shuffleArray(question.answers);
+  });
+  //display again
   view.setup();
 }
 
-const start = () => {
+const start = async () => {
+  //Filling the array of questions with shuffled data
+  view.arrayQuestions = shuffleArray(await getData());
+  //shuffling the answers as well
+  view.arrayQuestions.forEach(question => {
+    shuffleArray(question.answers);
+  });
+  //Setting the player name
   view.inputName();
-  questionShuffle();
+  //displaying the info
   view.setup();
 }
 
-
-window.addEventListener("load", getData);
 view.startBtnEl.addEventListener('click', start);
