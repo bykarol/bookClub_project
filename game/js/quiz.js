@@ -7,19 +7,12 @@ async function getData() {
       return [];
     }
     let bookData = await response.json();
-    // data(bookData); CLEAR
     return bookData;
   } catch (error) {
     console.error("Error:: ", error.message);
   }
   finally {
     console.log("Fetch completed");
-  }
-}
-
-const data = (questions) => {
-  for (const question of questions) {
-    view.arrayQuestions.push(question);
   }
 }
 
