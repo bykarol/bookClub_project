@@ -65,6 +65,36 @@ const view = {
   },
 }
 
+/* Down of this setup(), there are another setup function but written with template string 
+(both of them work perfectly - testing two different ways, same result) */
+// const setup = () => {
+//   view.mainEl.innerHTML = "";
+//   const fragment = document.createDocumentFragment();
+//   const scoreEl = document.createElement("p");
+//   scoreEl.textContent = `Score: ${view.score}`;
+//   const pQuestion = document.createElement("p");
+//   pQuestion.textContent = view.arrayQuestions[view.qIndex].question;
+//   const ulAnswers = document.createElement("ul");
+//   for (const answer of view.arrayQuestions[view.qIndex].answers) {
+//     const liElement = document.createElement("li");
+//     liElement.textContent = answer;
+//     ulAnswers.append(liElement);
+//   }
+//   fragment.append(scoreEl);
+//   fragment.append(pQuestion);
+//   fragment.append(ulAnswers);
+//   if (view.answerChecked !== undefined) {
+//     fragment.append(view.answerChecked);
+//   }
+//   view.mainEl.append(fragment);
+//   ulAnswers.addEventListener("click", (e) => {
+//     if (e.target.matches("li")) {
+//       checkAnswer(e);
+//     }
+//   });
+// }
+
+//function setup with template string (same functionality than function above)
 const setup = () => {
   //creating an array of answers inside a <li> with map
   const liElements = view.arrayQuestions[view.qIndex].answers.map((answer) => {
