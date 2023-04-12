@@ -53,32 +53,6 @@ const view = {
       this.userName = "Unknown";
     }
   },
-  setup() {
-    this.mainEl.innerHTML = "";
-    const fragment = document.createDocumentFragment();
-    const scoreEl = document.createElement("p");
-    scoreEl.textContent = `Score: ${this.score}`;
-    const pQuestion = document.createElement("p");
-    pQuestion.textContent = this.arrayQuestions[this.qIndex].question;
-    const ulAnswers = document.createElement("ul");
-    for (const answer of this.arrayQuestions[this.qIndex].answers) {
-      const liElement = document.createElement("li");
-      liElement.textContent = answer;
-      ulAnswers.append(liElement);
-    }
-    fragment.append(scoreEl);
-    fragment.append(pQuestion);
-    fragment.append(ulAnswers);
-    if (this.answerChecked !== undefined) {
-      fragment.append(this.answerChecked);
-    }
-    this.mainEl.append(fragment);
-    ulAnswers.addEventListener("click", (e) => {
-      if (e.target.matches("li")) {
-        checkAnswer(e);
-      }
-    });
-  },
   reset() {
     this.qIndex = 0;
     this.score = 0;
@@ -89,6 +63,35 @@ const view = {
       return b - a;
     })
   },
+}
+
+const setup = () => {
+  //creating an array of answers inside a <li> with map
+  const liElements = view.arrayQuestions[view.qIndex].answers.map((answer) => {
+    return `<li>${answer}</li>`;
+  });
+  //converting the array in string
+  const liAnswers = liElements.join("");
+  //clearing screen
+  view.mainEl.innerHTML = "";
+  let sectionEl = document.createElement("section");
+  sectionEl.innerHTML = `<p>Score: ${view.score}</p>
+  <p>${view.arrayQuestions[view.qIndex].question}</p>
+  <ul>
+    ${liAnswers}
+  </ul>`;
+  //event listener when click an answer
+  sectionEl.addEventListener("click", (e) => {
+    if (e.target.matches("li")) {
+      checkAnswer(e);
+    }
+  });
+  //appending a message to the section (answer correct or wrong)
+  if (view.answerChecked !== undefined) {
+    sectionEl.append(view.answerChecked);
+  }
+  //display (render)
+  view.mainEl.append(sectionEl);
 }
 
 // const saveScoreInLocalStorage = () => {
@@ -113,7 +116,7 @@ const checkAnswer = (ev) => {
   view.qIndex += 1;
   //displaying just till n quantity of questions
   if (view.qIndex < view.qtyQuestions) { //check
-    view.setup();
+    setup();
   }
   //filling the ranking
   if (view.qIndex === view.qtyQuestions) {
@@ -173,7 +176,7 @@ const playAgain = async (e) => {
     shuffleArray(question.answers);
   });
   //display again
-  view.setup();
+  setup();
 }
 
 const start = async () => {
@@ -186,7 +189,7 @@ const start = async () => {
   //Setting the player name
   view.inputName();
   //displaying the info
-  view.setup();
+  setup();
 }
 
 view.startBtnEl.addEventListener('click', start);
