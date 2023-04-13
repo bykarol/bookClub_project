@@ -7,7 +7,6 @@ async function getData() {
       return [];
     }
     let bookData = await response.json();
-    data(bookData);
     return bookData;
   } catch (error) {
     console.error("Error:: ", error.message);
@@ -17,25 +16,18 @@ async function getData() {
   }
 }
 
-const data = (questions) => {
-  for (const question of questions) {
-    view.arrayQuestions.push(question);
-  }
+const rndGenerator = (max) => {
+  return Math.floor(Math.random() * (max));
 }
 
-const rndGenerator = (questionsLength) => {
-  return Math.floor(Math.random() * (questionsLength));
-}
-
-const questionShuffle = () => {
-  let shuffleQuestions = [];
-  while (shuffleQuestions.length < view.qtyQuestions) {
-    const rdnNum = rndGenerator(view.arrayQuestions.length);
-    if (!shuffleQuestions.includes(view.arrayQuestions[rdnNum])) {
-      shuffleQuestions.push(view.arrayQuestions[rdnNum]);
-    }
+/*Using Fisher–Yates algorithm Explained in spanish
+ https://www.youtube.com/watch?v=0eKNvuPNLos*/
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = rndGenerator(i + 1);
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  view.arrayQuestions = shuffleQuestions;
+  return array;
 }
 
 // const localstorage = window.localStorage.getItem("rankingScores");
@@ -50,38 +42,8 @@ const view = {
   arrayQuestions: [],
   qIndex: 0,
   userName: undefined,
-  qtyQuestions: 6,
-  setup() {
-    this.mainEl.innerHTML = "";
-    const fragment = document.createDocumentFragment();
-    const scoreEl = document.createElement("p");
-    scoreEl.textContent = `Score: ${this.score}`;
-    const pQuestion = document.createElement("p");
-    pQuestion.textContent = this.arrayQuestions[this.qIndex].question;
-    const ulAnswers = document.createElement("ul");
-    for (const answer of this.arrayQuestions[this.qIndex].answers) {
-      const liElement = document.createElement("li");
-      liElement.textContent = answer;
-      ulAnswers.append(liElement);
-    }
-    fragment.append(scoreEl);
-    fragment.append(pQuestion);
-    fragment.append(ulAnswers);
-    if (this.answerChecked !== undefined) {
-      fragment.append(this.answerChecked);
-    }
-    this.mainEl.append(fragment);
-    ulAnswers.addEventListener("click", (e) => {
-      if (e.target.matches("li")) {
-        checkAnswer(e);
-      }
-    });
-  },
-  reset() {
-    this.qIndex = 0;
-    this.score = 0;
-    this.answerChecked = undefined;
-  },
+  qtyQuestions: 10,
+  spotsInRanking: 5,
   inputName() {
     const userNameElement = document.querySelector("#username");
     if (userNameElement.value) {
@@ -91,11 +53,75 @@ const view = {
       this.userName = "Unknown";
     }
   },
+  reset() {
+    this.qIndex = 0;
+    this.score = 0;
+    this.answerChecked = undefined;
+  },
   orderRanking() {
     this.arrayScores.sort((a, b) => {
       return b - a;
     })
   },
+}
+
+/* Down of this setup(), there are another setup function but written with template string 
+(both of them work perfectly - testing two different ways, same result) */
+// const setup = () => {
+//   view.mainEl.innerHTML = "";
+//   const fragment = document.createDocumentFragment();
+//   const scoreEl = document.createElement("p");
+//   scoreEl.textContent = `Score: ${view.score}`;
+//   const pQuestion = document.createElement("p");
+//   pQuestion.textContent = view.arrayQuestions[view.qIndex].question;
+//   const ulAnswers = document.createElement("ul");
+//   for (const answer of view.arrayQuestions[view.qIndex].answers) {
+//     const liElement = document.createElement("li");
+//     liElement.textContent = answer;
+//     ulAnswers.append(liElement);
+//   }
+//   fragment.append(scoreEl);
+//   fragment.append(pQuestion);
+//   fragment.append(ulAnswers);
+//   if (view.answerChecked !== undefined) {
+//     fragment.append(view.answerChecked);
+//   }
+//   view.mainEl.append(fragment);
+//   ulAnswers.addEventListener("click", (e) => {
+//     if (e.target.matches("li")) {
+//       checkAnswer(e);
+//     }
+//   });
+// }
+
+//function setup with template string (same functionality than function above)
+const setup = () => {
+  //creating an array of answers inside a <li> with map
+  const liElements = view.arrayQuestions[view.qIndex].answers.map((answer) => {
+    return `<li>${answer}</li>`;
+  });
+  //converting the array in string
+  const liAnswers = liElements.join("");
+  //clearing screen
+  view.mainEl.innerHTML = "";
+  let sectionEl = document.createElement("section");
+  sectionEl.innerHTML = `<p>Score: ${view.score}</p>
+  <p>${view.arrayQuestions[view.qIndex].question}</p>
+  <ul>
+    ${liAnswers}
+  </ul>`;
+  //event listener when click an answer
+  sectionEl.addEventListener("click", (e) => {
+    if (e.target.matches("li")) {
+      checkAnswer(e);
+    }
+  });
+  //appending a message to the section (answer correct or wrong)
+  if (view.answerChecked !== undefined) {
+    sectionEl.append(view.answerChecked);
+  }
+  //display (render)
+  view.mainEl.append(sectionEl);
 }
 
 // const saveScoreInLocalStorage = () => {
@@ -106,33 +132,38 @@ const view = {
 const checkAnswer = (ev) => {
   const userAnswer = ev.target.textContent;
   let pResult = document.createElement("p");
-  if (view.qIndex < view.arrayQuestions.length) {
-    if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
-      // console.log("Good!!");
-      pResult.classList.add("correct");
-      pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
-      view.answerChecked = pResult;
-      view.score += 1;
+  if (userAnswer === view.arrayQuestions[view.qIndex].correct) {
+    pResult.classList.add("correct");
+    pResult.textContent = `The answer is correct!!!: (${userAnswer})`;
+    view.answerChecked = pResult;
+    view.score += 1;
+  }
+  else {
+    pResult.classList.add("wrong");
+    pResult.textContent = `Wrong!!!. The correct answer is: ${view.arrayQuestions[view.qIndex].correct}`;
+    view.answerChecked = pResult;
+  }
+  view.qIndex += 1;
+  //displaying just till n quantity of questions
+  if (view.qIndex < view.qtyQuestions) { //check
+    setup();
+  }
+  //filling the ranking
+  if (view.qIndex === view.qtyQuestions) {
+    if (view.arrayScores.length < view.spotsInRanking) {
+      view.arrayScores.push(view.score);
     }
     else {
-      pResult.classList.add("wrong");
-      pResult.textContent = `Wrong!!!. The correct answer is: ${view.arrayQuestions[view.qIndex].correct}`;
-      view.answerChecked = pResult;
-    }
-    view.qIndex += 1;
-    view.setup();
-    if (view.qIndex === view.arrayQuestions.length - 1) {
-      if (view.arrayScores.length < 5) {
-        view.arrayScores.push(view.score);
+      for (let i = 0; i < view.arrayScores.length; i++) {
+        if (view.score > view.arrayScores[i]) {
+          view.arrayScores.pop();
+          view.arrayScores.push(view.score);
+        }
       }
-      else {
-        view.arrayScores.pop();
-        view.arrayScores.push(view.score);
-      }
-      // saveScoreInLocalStorage();
-      view.orderRanking();
-      gameOver();
     }
+    // saveScoreInLocalStorage();
+    view.orderRanking();
+    gameOver();
   }
 }
 
@@ -144,7 +175,7 @@ const gameOver = () => {
   const olScores = document.createElement("ol");
   const h3Element = document.createElement("h3");
   if (view.arrayScores.length > 0) {
-    h3Element.textContent = "Ranking Top 5";
+    h3Element.textContent = `Ranking Top ${view.spotsInRanking}`;
     for (let i = 0; i < view.arrayScores.length; i++) {
       const liScoreElement = document.createElement("li");
       liScoreElement.textContent = `#${i + 1} - ${view.userName} - score: ${view.arrayScores[i]}`;
@@ -156,7 +187,7 @@ const gameOver = () => {
   }
   buttonElement.textContent = "Play Again";
   buttonElement.classList.add("button");
-  scoreElement.textContent = `Your Score: ${view.score}/${view.qtyQuestions - 1}`;
+  scoreElement.textContent = `Your Score: ${view.score}/${view.qtyQuestions}`;
   lastFragment.append(scoreElement);
   lastFragment.append(h3Element);
   lastFragment.append(olScores);
@@ -165,19 +196,30 @@ const gameOver = () => {
   buttonElement.addEventListener("click", playAgain);
 }
 
-const playAgain = (e) => {
+const playAgain = async (e) => {
   e.preventDefault();
+  //reset values
   view.reset();
-  questionShuffle();
-  view.setup();
+  //shuffle again
+  view.arrayQuestions = shuffleArray(await getData());
+  view.arrayQuestions.forEach(question => {
+    shuffleArray(question.answers);
+  });
+  //display again
+  setup();
 }
 
-const start = () => {
+const start = async () => {
+  //Filling the array of questions with shuffled data
+  view.arrayQuestions = shuffleArray(await getData());
+  //shuffling the answers as well
+  view.arrayQuestions.forEach(question => {
+    shuffleArray(question.answers);
+  });
+  //Setting the player name
   view.inputName();
-  questionShuffle();
-  view.setup();
+  //displaying the info
+  setup();
 }
 
-
-window.addEventListener("load", getData);
 view.startBtnEl.addEventListener('click', start);

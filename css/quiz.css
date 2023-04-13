@@ -1,7 +1,8 @@
 @import url(../css/base.css);
 
 /* MAIN */
-#q-main {
+#q-main,
+section {
   display: flex;
   flex-direction: column;
   place-content: center;
